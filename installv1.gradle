@@ -1,6 +1,7 @@
 apply plugin: 'com.github.dcendents.android-maven'
 
 group = publishedGroupId                               // Maven Group ID for the artifact
+version = libraryVersion
 
 install {
     repositories.mavenInstaller {
@@ -37,6 +38,17 @@ install {
 
                 }
             }
+        }
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId publishedGroupId
+            version version
+            artifactId artifact
+            artifact "$buildDir/outputs/$ARTIFACT_TYPE/$ARTIFACT_NAME-release.$ARTIFACT_TYPE"
         }
     }
 }
